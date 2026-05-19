@@ -13,15 +13,23 @@
                     <!-- form -->
                     <div class="row justify-content-center">
                         <div class="col-md-10 col-12">
-                            <form action="{{ route('login') }}" method="post">
+                            <form action="{{ route('login') }}" method="post" novalidate>
                                 @csrf
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Username</label>
-                                    <input type="text" class="form-control bg-dark text-info" name="email" required>
+                                    <input type="text" class="form-control bg-dark text-info" name="email"
+                                        value="{{ old('email') }}" required>
+                                    @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control bg-dark text-info" name="password" required>
+                                    <input type="password" class="form-control bg-dark text-info" name="password"
+                                        value="{{ old('password') }}" required>
+                                    @error('password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-secondary w-100">LOGIN</button>
