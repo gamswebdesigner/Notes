@@ -13,14 +13,15 @@
                     <!-- form -->
                     <div class="row justify-content-center">
                         <div class="col-md-10 col-12">
-                            <form action="#" method="post">
+                            <form action="/login" method="post">
+                                @csrf
                                 <div class="mb-3">
-                                    <label for="text_username" class="form-label">Username</label>
+                                    <label for="username" class="form-label">Username</label>
                                     <input type="text" class="form-control bg-dark text-info" name="text_username"
                                         required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="text_password" class="form-label">Password</label>
+                                    <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control bg-dark text-info" name="text_password"
                                         required>
                                 </div>
