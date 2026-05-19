@@ -13,17 +13,15 @@
                     <!-- form -->
                     <div class="row justify-content-center">
                         <div class="col-md-10 col-12">
-                            <form action="/login" method="post">
+                            <form action="{{ route('login') }}" method="post">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control bg-dark text-info" name="text_username"
-                                        required>
+                                    <label for="email" class="form-label">Username</label>
+                                    <input type="text" class="form-control bg-dark text-info" name="email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control bg-dark text-info" name="text_password"
-                                        required>
+                                    <input type="password" class="form-control bg-dark text-info" name="password" required>
                                 </div>
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-secondary w-100">LOGIN</button>

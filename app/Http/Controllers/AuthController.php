@@ -12,10 +12,10 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => 'required'
+            'password' => ['required']
         ]);
 
-        if (Auth::attempt([$credentials])) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('home');
         }
@@ -29,7 +29,7 @@ class AuthController extends Controller
     {
         Auth::logout();
         $request->session()->invalidate();
-        $request->session()->regenerate();
+        $request->session()->regenerateToken();
         return redirect()->route('login');
     }
 }
