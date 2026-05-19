@@ -7,5 +7,5 @@ Route::view('/login', 'auth.login')->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', 'home')->name('home');
+    Route::view('/', 'home')->name('home');
 });
