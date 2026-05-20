@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Override;
 
 class User extends Authenticatable
 {
@@ -16,6 +17,26 @@ class User extends Authenticatable
     public function notes()
     {
         return $this->hasMany(Note::class);
+    }
+
+    public $salt = 123456789;
+
+    public function getRouteKey(): string
+    {
+        $hashId = $this->getKey() * $this->salt;
+        return rtrim(strtr(base64_encode($hashId), '+/', '-_'), '=');
+    }
+
+    #[Override]
+    public function resolveRouteBinding($value, $field = null)
+    {
+        $padded = str_pad(strtr($value, '-_', '+/'), strlen($value) % 4, '=', STR_PAD_RIGHT);
+        $decoded = base64_decode($padded);
+        if ($decoded !== false && is_numeric($decoded)) {
+            $id = (int)$decoded / $this->salt;
+            return $this->where($field ?? $this->getKeyName(), $id)->firstOrFail();
+        }
+        abort(404);
     }
 
     /**
