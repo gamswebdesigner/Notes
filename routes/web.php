@@ -15,6 +15,6 @@ Route::middleware('auth')->group(function () {
     Route::redirect('/home', 'home');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/note', [NoteController::class, 'index'])->name('newNote');
-    Route::get('/{user}/note', [NoteController::class, 'note'])->name('editNote');
+    Route::get('/note/{note}', [NoteController::class, 'editNote'])->name('editNote');
     Route::post('/save', [NoteController::class, 'save'])->name('save');
 });
