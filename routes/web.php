@@ -12,9 +12,10 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [NoteController::class, 'index'])->name('home');
-    Route::redirect('/home', 'home');
+    Route::redirect('/home', '/');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/note', [NoteController::class, 'index'])->name('newNote');
-    Route::get('/note/{note}', [NoteController::class, 'edit'])->name('editNote');
+    Route::view('/note/new', [NoteController::class, 'note'])->name('newNote');
+    Route::get('/note/edit/{id}', [NoteController::class, 'edit'])->name('editNote');
+    Route::get('/note/{id}', [NoteController::class, 'delete'])->name('deleteNote');
     Route::post('/save', [NoteController::class, 'save'])->name('save');
 });

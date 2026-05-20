@@ -24,7 +24,11 @@ class NoteController extends Controller
 
     public function edit($id)
     {
-        $id = Operations::encrypt($id);
         return view('note', ['note_id' => $id]);
+    }
+
+    public function delete($id)
+    {
+        return 'delete';
     }
 }
