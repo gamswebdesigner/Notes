@@ -52,22 +52,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    private static int $salt = 123456789;
-
-    public static function encrypt($value): string
-    {
-        $hashId = $value * self::$salt;
-        return rtrim(strtr(base64_encode($hashId), '+/', '-_'), '=');
-    }
-
-    public static function decrypt(string $value): int
-    {
-        $padded = str_pad(strtr($value, '-_', '+/'), strlen($value) % 4, '=', STR_PAD_RIGHT);
-        $decoded = base64_decode($padded);
-        if ($decoded !== false && is_numeric($decoded)) {
-            return (int)$decoded / self::$salt;
-        }
-        return false;
-    }
 }
