@@ -6,6 +6,13 @@
 
                 @include('header')
 
+                @if (session('error'))
+                    <div class="alert alert-danger"
+                        style="color: red; background: #fee2e2; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <!-- label and cancel -->
                 <div class="row">
                     <div class="col">
@@ -19,16 +26,24 @@
                 </div>
 
                 <!-- form -->
-                <form action="#" method="post">
+                <form action="{{ route('save') }}" method="post">
+                    @csrf
                     <div class="row mt-3">
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label">Note Title</label>
-                                <input type="text" class="form-control bg-primary text-white" name="text_title">
+                                <input type="text" class="form-control bg-primary text-white" name="note_title"
+                                    value="{{ old('note_title', $note->title ?? '') }}">
+                                @error('note_title')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Note Text</label>
-                                <textarea class="form-control bg-primary text-white" name="text_note" rows="5"></textarea>
+                                <textarea class="form-control bg-primary text-white" name="note_text" rows="5">{{ old('note_title', $note->title ?? '') }}</textarea>
+                                @error('note_text')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
