@@ -16,6 +16,7 @@ class NoteController extends Controller
 
     public function note()
     {
-        echo 'note';
+        $user = auth()->user();
+        return view('note', compact('user'));
     }
 }
