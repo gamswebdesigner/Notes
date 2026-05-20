@@ -26,7 +26,8 @@
                 </div>
 
                 <!-- form -->
-                <form action="{{ route('save') }}" method="post">
+                <form action="{{ isset($note->hash_id) ? route('save', ['id' => $note->hash_id]) : route('save') }}"
+                    method="post">
                     @csrf
                     <div class="row mt-3">
                         <div class="col">
@@ -40,7 +41,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Note Text</label>
-                                <textarea class="form-control bg-primary text-white" name="note_text" rows="5">{{ old('note_title', $note->title ?? '') }}</textarea>
+                                <textarea class="form-control bg-primary text-white" name="note_text" rows="5">{{ old('note_text', $note->text ?? '') }}</textarea>
                                 @error('note_text')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror

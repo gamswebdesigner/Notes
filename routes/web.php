@@ -16,6 +16,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::view('/note', 'note')->name('newNote');
     Route::get('/note/edit/{id}', [NoteController::class, 'edit'])->name('editNote');
-    Route::post('/save', [NoteController::class, 'save'])->name('save');
+    Route::post('/save/{id?}', [NoteController::class, 'save'])->name('save');
     Route::get('/note/{id}', [NoteController::class, 'delete'])->name('deleteNote');
 });

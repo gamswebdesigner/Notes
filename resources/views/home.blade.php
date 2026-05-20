@@ -38,10 +38,10 @@
                                                 at:</span><strong>{{ date('Y-m-y H:i:s', strtotime($note['created_at'])) }}</strong></small>
                                     </div>
                                     <div class="col text-end">
-                                        <a href="{{ route('editNote', ['id', $note['hash_id']]) }}"
+                                        <a href="{{ route('editNote', ['id' => $note['hash_id']]) }}"
                                             class="btn btn-outline-secondary btn-sm mx-1"><i
                                                 class="fa-regular fa-pen-to-square"></i></a>
-                                        <a href="{{ route('deleteNote', ['id', $note['hash_id']]) }}"
+                                        <a href="{{ route('deleteNote', ['id' => $note['hash_id']]) }}"
                                             class="btn btn-outline-danger btn-sm mx-1"><i
                                                 class="fa-regular fa-trash-can"></i></a>
                                     </div>

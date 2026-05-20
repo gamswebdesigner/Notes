@@ -12,6 +12,7 @@ class NoteController extends Controller
 {
     public function index()
     {
+        /** @var \App\Models\User $user */
         $user = auth()->id();
         $notesArray = User::find($user)->notes()->get();
 
@@ -34,9 +35,8 @@ class NoteController extends Controller
         try {
             $realId = $id ? Operations::decrypt($id) : null;
             Note::updateOrCreate(
-                ['id' => $realId],
+                ['id' => $realId, 'user_id' => auth()->id()],
                 [
-                    'user_id' => auth()->id(),
                     'title' => $request->input('note_title'),
                     'text' => $request->input('note_text')
                 ]
@@ -52,11 +52,23 @@ class NoteController extends Controller
 
     public function edit($id)
     {
-        return view('note', ['note_id' => $id]);
+        $realId = Operations::decrypt($id);
+        $note = Note::findOrFail($realId);
+        $note->hash_id = $id;
+        return view('note', ['note' => $note]);
     }
 
     public function delete($id)
     {
-        return 'delete';
+        $realId = Operations::decrypt($id);
+        $note = Note::findOrFail($realId);
+
+        if ($note->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $note->delete();
+
+        return redirect()->route('home')->with('success', 'Note deleted!');
     }
 }
