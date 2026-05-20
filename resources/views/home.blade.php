@@ -35,7 +35,7 @@
                                     <div class="col">
                                         <h4 class="text-info">{{ $note['title'] }}</h4>
                                         <small class="text-secondary"><span class="opacity-75 me-2">Created
-                                                at:</span><strong>{{ $note['created_at'] }}</strong></small>
+                                                at:</span><strong>{{ date('Y-m-y H:i:s', strtotime($note['created_at'])) }}</strong></small>
                                     </div>
                                     <div class="col text-end">
                                         <a href="#" class="btn btn-outline-secondary btn-sm mx-1"><i
@@ -49,6 +49,7 @@
                             </div>
                         </div>
                     </div>
+                    <br>
                 @endforeach
             </div>
         </div>
