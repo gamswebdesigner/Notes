@@ -12,7 +12,7 @@
                         <p class="display-6 mb-0">NEW NOTE</p>
                     </div>
                     <div class="col text-end">
-                        <a href="{{ route('home', $user) }}" class="btn btn-outline-danger">
+                        <a href="{{ route('home') }}" class="btn btn-outline-danger">
                             <i class="fa-solid fa-xmark"></i>
                         </a>
                     </div>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col text-end">
-                            <a href="{{ route('home', $user) }}" class="btn btn-primary px-5"><i
+                            <a href="{{ route('home') }}" class="btn btn-primary px-5"><i
                                     class="fa-solid fa-ban me-2"></i>Cancel</a>
                             <button type="submit" class="btn btn-secondary px-5"><i
                                     class="fa-regular fa-circle-check me-2"></i>Save</button>
