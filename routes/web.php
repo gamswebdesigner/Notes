@@ -11,13 +11,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return redirect(route('home', auth()->user()));
-    });
-    Route::get('/home', function () {
-        return redirect(route('home', auth()->user()));
-    });
+    Route::get('/', [NoteController::class, 'index'])->name('home');
+    Route::redirect('/home', 'home');
     Route::get('/note', [NoteController::class, 'note'])->name('note');
-    Route::get('/{user}', [NoteController::class, 'index'])->name('home');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
