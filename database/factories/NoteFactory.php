@@ -21,7 +21,7 @@ class NoteFactory extends Factory
         return [
             'user_id' => User::factory(),
             'title' => $this->faker->sentence(rand(3, 4)),
-            'content' => $this->faker->sentence(7, 15),
+            'text' => $this->faker->sentence(7, 15),
             'created_at' => $this->faker->dateTimeBetween('-1 month', 'now')
         ];
     }
